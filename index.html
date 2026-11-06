@@ -215,9 +215,9 @@ body.brand-studio .search input::placeholder{font-size:11px;letter-spacing:.02em
 .hero__scrim{position:absolute;inset:0;background:linear-gradient(90deg,var(--scrim-deep) 0%,rgba(46,46,46,.34) 46%,rgba(46,46,46,.12) 100%);}
 .hero__copy{position:absolute;inset:0;display:flex;align-items:center;}
 .hero__inner{max-width:var(--content);margin-inline:auto;padding-inline:var(--gut);width:100%;color:var(--bg);}
-.hero__box{max-width:640px;}
+.hero__box{max-width:min(780px,62vw);}
 .hero__kicker{font-size:11px;letter-spacing:.3em;text-transform:uppercase;opacity:.88;display:block;margin-bottom:22px;font-weight:600;}
-.hero__h{font-family:var(--f-title);font-size:clamp(38px,6vw,80px);line-height:1.03;margin-bottom:20px;}
+.hero__h{font-family:var(--f-title);font-size:clamp(34px,5vw,68px);line-height:1.06;margin-bottom:20px;}
 .hero__sub{font-size:clamp(15px,1.35vw,18.5px);line-height:1.6;max-width:44ch;margin-bottom:28px;opacity:.94;}
 .hero__ctrl{position:absolute;left:0;right:0;bottom:34px;z-index:3;}
 .hero__ctrl-in{max-width:var(--content);margin-inline:auto;padding-inline:var(--gut);
@@ -314,6 +314,14 @@ body.brand-studio .search input::placeholder{font-size:11px;letter-spacing:.02em
 .qty--wide{display:grid;width:100%;}
 
 /* ============ CATEGORY TILES ============ */
+.colls{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--s3);}
+.colls a{display:block;}
+.colls img{width:100%;aspect-ratio:4/5;object-fit:cover;background:var(--bg-alt);
+  transition:opacity .3s var(--ease);}
+.colls a:hover img{opacity:.88;}
+.colls b{display:block;margin-top:16px;text-align:center;font-family:var(--f-title);
+  font-size:clamp(19px,1.7vw,24px);font-weight:400;}
+@media (max-width:899px){.colls{grid-template-columns:1fr 1fr;}}
 .cats{display:grid;grid-template-columns:repeat(5,1fr);gap:var(--s3);}
 .cat{position:relative;display:block;overflow:hidden;background:var(--ink);}
 .cat img{width:100%;aspect-ratio:3/4;object-fit:cover;transition:transform .7s var(--ease);opacity:.86;}
@@ -762,6 +770,7 @@ body.is-member .guest-only{display:none !important;}
   .wordmark__a{font-size:21px;}
   .hero{height:clamp(440px,64vh,560px);}
   .hero__scrim{background:linear-gradient(180deg,rgba(46,46,46,.28),rgba(46,46,46,.66));}
+  .hero__box{max-width:none;}
   .split,.duo,.events,.opts,.grid2,.grid3,.tiles3,.acct{grid-template-columns:1fr;}
   .locator{grid-template-columns:1fr;}
   .split--flip .split__img{order:0;}
@@ -1022,6 +1031,7 @@ body.is-member .guest-only{display:none !important;}
         <div class="rail__track" id="rail-new" data-rail-new></div>
         <button class="rail__arrow next" type="button" aria-label="Scroll new products right" data-rail-next="rail-new"><svg width="18" height="18" aria-hidden="true"><use href="#i-r"/></svg></button>
       </div>
+      <div class="colls" data-collections hidden></div>
       <div class="sec__cta"><a class="btn btn--ghost btn--lg" href="#" data-view-link="plp" data-cat="New" data-new-all>View All New</a></div>
     </div>
   </section>
@@ -1330,7 +1340,7 @@ body.is-member .guest-only{display:none !important;}
   <section class="sec" style="padding-bottom:var(--s5)">
     <div class="wrap wrap--narrow" style="margin-inline:auto;text-align:center">
       <p class="eyebrow" style="margin-bottom:var(--s3)">About us</p>
-      <h1 class="t-h1" data-about-h>On-trend, quality products. Dependable service. Family-owned.</h1>
+      <h1 class="t-h1" data-about-h>On-trend, quality products.<br>Dependable service.<br>Family-owned.</h1>
       <p class="lede" data-about-sub style="margin:var(--s3) auto 0;text-align:center">For over three decades, we have supplied retailers with products for every season, from cozy winter accents to light summer essentials. We design and select each collection to bring warmth and character to your customers' homes.</p>
     </div>
   </section>
@@ -1613,7 +1623,7 @@ var BRAND={
 var HERO={
 adv:[
  {k:"Newest Collection",h:"Our Spring 2027 Collection is Here",s:"Discover hundreds of new additions inspired by the timeless beauty of nature, coastal escapes, heritage craftsmanship, and the charm of blooming gardens. Order now to take advantage of our pre-booking specials!",c:"Shop Now",v:"plp",cat:"New",i:32,a:"Sunlit console styled with dried botanicals and a pale ceramic vessel"},
- {k:"AdV Home",h:"Carefully Designed. Thoughtfully Curated.",s:"AdV is your destination for distinctive wholesale décor inspired by the beauty of human craftsmanship. Discover pieces that bring warmth and character to any corner of the home.",c:"Shop Now",v:"plp",cat:"Home Décor",i:33,a:"Layered living room with rattan pendants, low seating and styled shelving"},
+ {k:"AdV Home",h:"Carefully Designed.|Thoughtfully Curated.",s:"AdV is your destination for distinctive wholesale décor inspired by the beauty of human craftsmanship. Discover pieces that bring warmth and character to any corner of the home.",c:"Shop Now",v:"plp",cat:"Home Décor",i:33,a:"Layered living room with rattan pendants, low seating and styled shelving"},
  {k:"Cash & Carry",h:"Cash & Carry",s:"Our Cash & Carry is open to the public. Buy end-of-line and clearance products at our showroom. No minimum. Take them with you the same day.",c:"Visit our Montreal Showroom",v:"showrooms",cat:"",i:34,a:"Bright showroom floor with a bistro table, linen drapery and glassware"}],
 studio:[
  {k:"Studio Specialties",h:"Specified for Contract",s:"Custom and made-to-order décor for hospitality, contract and multi-unit residential specification.",c:"Explore Studio",v:"plp",cat:"New",i:29,a:"Minimal arched alcove holding tall sculptural vessels"},
@@ -1627,6 +1637,10 @@ var SCATS=[
  {n:"Fake Food",i:3,a:"Styled tabletop with realistic display food and ceramics"},
  {n:"Seamless Paper",i:29,a:"Photography studio corner with seamless paper backdrop"},
  {n:"Liquidation",i:11,a:"Clearance display shelf with assorted décor pieces"}];
+
+var COLLECTIONS=[
+ {n:"Coastline Living",i:29},{n:"Cottagecore",i:30},
+ {n:"French Heritage",i:33},{n:"Flower Market",i:0}];
 
 var CATS=[
  {n:"New",i:32,a:"Console styled with dried botanicals"},
@@ -1684,30 +1698,30 @@ var SCATALOGUES=[
 
 /* Products: n,sku,cat,coll,mat,col,dim,wt,pack,ship,avail,brand,tags,i1,i2,desc */
 var RAW=[
-["Lucerne Ceramic Vessel","ADV-20339","Vases","Maison","Ceramic","Ivory","11 in H × 6.5 in Dia","2.4 lb",4,"Ground","in","adv","new",13,17],
-["Beaumont Fluted Vase","ADV-20341","Vases","Maison","Stoneware","Cream","14 in H × 5 in Dia","3.1 lb",4,"Ground","in","adv","new",17,13],
-["Sorel Glass Bud Vase","ADV-20355","Vases","Atelier","Glass","Clear","7 in H × 3 in Dia","0.9 lb",8,"Ground","in","adv","",4,10],
-["Amiens Stone Urn","ADV-20362","Vases","Jardin","Natural Stone","Tan","16 in H × 11 in Dia","18 lb",1,"Freight","low","adv","",6,0],
-["Verdun Serving Bowl","ADV-20370","Tabletop","Table","Stoneware","Ivory","12 in Dia × 3 in H","2.8 lb",6,"Ground","in","adv","new",3,4],
-["Clairmont Marble Tray","ADV-20378","Tabletop","Table","Natural Stone","Cream","16 in × 10 in","6.2 lb",2,"Ground","in","adv","",10,3],
-["Lachine Taper Holder Set","ADV-20384","Tabletop","Atelier","Metal","Bronze","Set of 3 · 4–8 in H","1.6 lb",6,"Ground","in","adv","sale",4,20],
-["Rosemont Hurricane","ADV-20391","Tabletop","Maison","Glass","Clear","10 in H × 6 in Dia","2.2 lb",4,"Ground","in","adv","",26,4],
-["Bellevue Carved Bowl","ADV-20402","Decorative Accessories","Atelier","Wood","Brown","14 in Dia × 4 in H","3.4 lb",3,"Ground","in","adv","new",14,18],
-["Cartier Reed Diffuser","ADV-20411","Decorative Accessories","Maison","Glass","Ivory","8 in H · 200 ml","1.4 lb",6,"Ground","in","adv","",5,11],
-["Laurier Sculptural Object","ADV-20418","Decorative Accessories","Atelier","Resin","Cream","9 in H × 5 in W","1.8 lb",4,"Ground","in","adv","",4,14],
-["Outremont Woven Basket","ADV-20425","Decorative Accessories","Jardin","Woven","Tan","15 in Dia × 13 in H","2.6 lb",2,"Ground","in","adv","",18,14],
-["Saint-Denis Wall Mirror","ADV-20433","Wall Décor","Maison","Metal","Bronze","30 in Dia","14 lb",1,"Freight","in","adv","new",19,8],
-["Mirabel Framed Study","ADV-20440","Wall Décor","Atelier","Wood","Ivory","24 in × 32 in","7.5 lb",1,"Freight","in","adv","",8,22],
-["Granby Wall Clock","ADV-20447","Wall Décor","Maison","Wood","Tan","13 in Dia","2.1 lb",3,"Ground","in","adv","sale",10,11],
-["Joliette Table Lamp","ADV-20455","Lighting","Maison","Ceramic","Ivory","24 in H · 3-way switch","6.8 lb",2,"Ground","in","adv","new",11,20],
-["Terrebonne Floor Lamp","ADV-20461","Lighting","Atelier","Metal","Bronze","62 in H","11 lb",1,"Freight","low","adv","",11,22],
-["Longueuil Accent Table","ADV-20470","Furniture","Atelier","Wood","Brown","20 in H × 18 in Dia","16 lb",1,"Freight","in","adv","",2,9],
-["Chambly Nesting Tables","ADV-20476","Furniture","Atelier","Manufactured Wood","Brown","Set of 2 · 22 / 18 in H","28 lb",1,"Freight","in","adv","new",2,12],
-["Rivière Lounge Chair","ADV-20483","Furniture","Maison","Linen","Cream","31 in H × 27 in W","34 lb",1,"Freight","out","adv","",7,12],
-["Bromont Terracotta Planter","ADV-20490","Planters","Jardin","Terracotta","Brown","12 in H × 11 in Dia","7.4 lb",2,"Ground","in","adv","",6,1],
-["Magog Turned Wood Planter","ADV-20496","Planters","Jardin","Wood","Tan","9 in H × 8 in Dia","3.2 lb",4,"Ground","in","adv","new",0,1],
-["Sutton Fibre Cement Planter","ADV-20503","Planters","Jardin","Concrete","Gray","18 in H × 16 in Dia","22 lb",1,"Freight","in","adv","sale",1,6],
-["Knowlton Plant Stand","ADV-20509","Garden","Jardin","Metal","Bronze","26 in H × 12 in Dia","5.6 lb",2,"Ground","in","adv","",1,0],
+["Lucerne Ceramic Vessel","ADV-20339","Vases","French Heritage","Ceramic","Ivory","11 in H × 6.5 in Dia","2.4 lb",4,"Ground","in","adv","new",13,17],
+["Beaumont Fluted Vase","ADV-20341","Vases","French Heritage","Stoneware","Cream","14 in H × 5 in Dia","3.1 lb",4,"Ground","in","adv","new",17,13],
+["Sorel Glass Bud Vase","ADV-20355","Vases","Cottagecore","Glass","Clear","7 in H × 3 in Dia","0.9 lb",8,"Ground","in","adv","",4,10],
+["Amiens Stone Urn","ADV-20362","Vases","Flower Market","Natural Stone","Tan","16 in H × 11 in Dia","18 lb",1,"Freight","low","adv","",6,0],
+["Verdun Serving Bowl","ADV-20370","Tabletop","Coastline Living","Stoneware","Ivory","12 in Dia × 3 in H","2.8 lb",6,"Ground","in","adv","new",3,4],
+["Clairmont Marble Tray","ADV-20378","Tabletop","Coastline Living","Natural Stone","Cream","16 in × 10 in","6.2 lb",2,"Ground","in","adv","",10,3],
+["Lachine Taper Holder Set","ADV-20384","Tabletop","Cottagecore","Metal","Bronze","Set of 3 · 4–8 in H","1.6 lb",6,"Ground","in","adv","sale",4,20],
+["Rosemont Hurricane","ADV-20391","Tabletop","French Heritage","Glass","Clear","10 in H × 6 in Dia","2.2 lb",4,"Ground","in","adv","",26,4],
+["Bellevue Carved Bowl","ADV-20402","Decorative Accessories","Cottagecore","Wood","Brown","14 in Dia × 4 in H","3.4 lb",3,"Ground","in","adv","new",14,18],
+["Cartier Reed Diffuser","ADV-20411","Decorative Accessories","French Heritage","Glass","Ivory","8 in H · 200 ml","1.4 lb",6,"Ground","in","adv","",5,11],
+["Laurier Sculptural Object","ADV-20418","Decorative Accessories","Cottagecore","Resin","Cream","9 in H × 5 in W","1.8 lb",4,"Ground","in","adv","",4,14],
+["Outremont Woven Basket","ADV-20425","Decorative Accessories","Flower Market","Woven","Tan","15 in Dia × 13 in H","2.6 lb",2,"Ground","in","adv","",18,14],
+["Saint-Denis Wall Mirror","ADV-20433","Wall Décor","French Heritage","Metal","Bronze","30 in Dia","14 lb",1,"Freight","in","adv","new",19,8],
+["Mirabel Framed Study","ADV-20440","Wall Décor","Cottagecore","Wood","Ivory","24 in × 32 in","7.5 lb",1,"Freight","in","adv","",8,22],
+["Granby Wall Clock","ADV-20447","Wall Décor","French Heritage","Wood","Tan","13 in Dia","2.1 lb",3,"Ground","in","adv","sale",10,11],
+["Joliette Table Lamp","ADV-20455","Lighting","French Heritage","Ceramic","Ivory","24 in H · 3-way switch","6.8 lb",2,"Ground","in","adv","new",11,20],
+["Terrebonne Floor Lamp","ADV-20461","Lighting","Cottagecore","Metal","Bronze","62 in H","11 lb",1,"Freight","low","adv","",11,22],
+["Longueuil Accent Table","ADV-20470","Furniture","Cottagecore","Wood","Brown","20 in H × 18 in Dia","16 lb",1,"Freight","in","adv","",2,9],
+["Chambly Nesting Tables","ADV-20476","Furniture","Cottagecore","Manufactured Wood","Brown","Set of 2 · 22 / 18 in H","28 lb",1,"Freight","in","adv","new",2,12],
+["Rivière Lounge Chair","ADV-20483","Furniture","French Heritage","Linen","Cream","31 in H × 27 in W","34 lb",1,"Freight","out","adv","",7,12],
+["Bromont Terracotta Planter","ADV-20490","Planters","Flower Market","Terracotta","Brown","12 in H × 11 in Dia","7.4 lb",2,"Ground","in","adv","",6,1],
+["Magog Turned Wood Planter","ADV-20496","Planters","Flower Market","Wood","Tan","9 in H × 8 in Dia","3.2 lb",4,"Ground","in","adv","new",0,1],
+["Sutton Fibre Cement Planter","ADV-20503","Planters","Flower Market","Concrete","Gray","18 in H × 16 in Dia","22 lb",1,"Freight","in","adv","sale",1,6],
+["Knowlton Plant Stand","ADV-20509","Garden","Flower Market","Metal","Bronze","26 in H × 12 in Dia","5.6 lb",2,"Ground","in","adv","",1,0],
 ["Studio Halo Pendant","STS-30112","Lighting","Contract","Metal","Bronze","18 in Dia × 14 in H","9.2 lb",1,"Freight","in","studio","new",33,11],
 ["Studio Meridian Console","STS-30124","Furniture","Contract","Manufactured Wood","Brown","32 in H × 60 in W","74 lb",1,"Freight","in","studio","",9,2],
 ["Studio Atrium Vessel","STS-30131","Vases","Contract","Ceramic","Ivory","19 in H × 9 in Dia","6.4 lb",2,"Freight","in","studio","new",28,13],
@@ -1822,7 +1836,7 @@ function renderHero(){
     return '<div class="hero__slide'+(i===0?" is-on":"")+'" role="group" aria-roledescription="slide" aria-label="Slide '+(i+1)+' of '+list.length+'">'+
       '<img src="'+img(P[s.i],1900)+'" alt="'+esc(s.a)+'"'+(i?' loading="lazy"':'')+' decoding="async">'+
       '<span class="hero__scrim"></span><div class="hero__copy"><div class="hero__inner"><div class="hero__box">'+
-      '<span class="hero__kicker">'+esc(s.k)+'</span><p class="hero__h">'+esc(s.h)+'</p>'+
+      '<span class="hero__kicker">'+esc(s.k)+'</span><p class="hero__h">'+esc(s.h).split("|").join("<br>")+'</p>'+
       '<p class="hero__sub">'+esc(s.s)+'</p>'+
       '<a class="btn btn--onimg" href="#" data-view-link="'+s.v+'"'+(s.cat?' data-cat="'+esc(s.cat)+'"':'')+'>'+esc(s.c)+'</a>'+
       '</div></div></div></div>';}).join("");
@@ -1836,10 +1850,10 @@ function renderCats(){
   $("[data-stock-sub]").textContent=S.brand==="studio"
     ? "Christmas, seasonal, fake food, seamless paper and liquidation — the full Studio range."
     : "Ready to ship from our Montréal warehouse. Shop the same categories you see in the menu above.";
-  $("[data-new-h]").textContent=S.brand==="studio"?"Best Sellers":"New";
+  $("[data-new-h]").textContent=S.brand==="studio"?"Best Sellers":"New Collections";
   $("[data-new-sub]").textContent=S.brand==="studio"
     ? "The pieces our display and styling clients reorder season after season."
-    : "Discover our newest introductions, photographed in our Montréal studio and ready for your next order.";
+    : "Browse our latest collections, as shown in our most recent catalog.";
   $("[data-years]").hidden=S.brand!=="studio";
   $("[data-new-all]").textContent=S.brand==="studio"?"Shop Best Sellers":"View All New";
   $("[data-stock-all]").textContent="Shop All In-Stock";
@@ -1861,9 +1875,11 @@ function renderCats(){
     : "Take our latest catalogs with you — download a copy as a PDF.";
   $("[data-tile2-cta]").textContent="Download Now";
   /* SLIDES 4 + 5: heading, subheading, then mood shots */
-  $("[data-about-h]").textContent=st
-    ? "Display built to be seen. Service you can plan around. Family-owned."
-    : "On-trend, quality products. Dependable service. Family-owned.";
+  /* each claim on its own line */
+  $("[data-about-h]").innerHTML=(st
+    ? ["Display built to be seen.","Service you can plan around.","Family-owned."]
+    : ["On-trend, quality products.","Dependable service.","Family-owned."]
+  ).map(esc).join("<br>");
   $("[data-about-sub]").textContent=st
     ? "For three decades we have supplied retailers, florists, stylists and photographers with display for every season — props, backdrops and seasonal programmes designed and shipped from Montréal."
     : "For over three decades, we have supplied retailers with products for every season, from cozy winter accents to light summer essentials. We design and select each collection to bring warmth and character to your customers' homes.";
@@ -1951,6 +1967,15 @@ function fillRails(){
   if(S.brand==="studio"){n=byBrand().slice().sort(function(a,b){return b.rank-a.rank;});}
   else{n=byBrand().filter(function(p){return p.tag==="new";});
        if(n.length<6)n=n.concat(byBrand().filter(function(p){return p.tag!=="new";}));}
+  var adv=S.brand!=="studio";
+  $("[data-collections]").hidden=!adv;
+  $("[data-rail-new]").closest(".rail").hidden=adv;
+  if(adv){
+    $("[data-collections]").innerHTML=COLLECTIONS.map(function(c){
+      return '<a href="#" data-view-link="plp" data-cat="'+esc(c.n)+'">'+
+        '<img src="'+img(P[c.i],760)+'" alt="'+esc(c.n)+' collection" loading="lazy" decoding="async">'+
+        '<b>'+esc(c.n)+'</b></a>';}).join("");
+  }
   $("[data-rail-new]").innerHTML=n.slice(0,8).map(cardHTML).join("");
   setTimeout(syncRails,60);
 }
@@ -1982,7 +2007,8 @@ function basePool(){
   else if(c==="In-Stock")pool=pool.filter(function(p){return p.avail==="in";});
   else if(c==="Seasonal")pool=pool.filter(function(p){return S.brand==="studio"
       ? (p.cat==="Seasonal"||p.cat==="Christmas")
-      : (p.coll==="Jardin"||p.coll==="Maison");});
+      : (p.coll==="Flower Market"||p.coll==="French Heritage");});
+  else if(COLLECTIONS.some(function(x){return x.n===c;}))pool=pool.filter(function(p){return p.coll===c;});
   else if(c==="Home Décor")pool=pool.filter(function(p){return ["Vases","Tabletop","Decorative Accessories","Wall Décor","Lighting","Furniture"].indexOf(p.cat)>-1;});
   else if(c==="Liquidation")pool=pool.filter(function(p){return p.cat==="Liquidation"||p.tag==="sale";});
   else if(c!=="All")pool=pool.filter(function(p){return p.cat===c;});
